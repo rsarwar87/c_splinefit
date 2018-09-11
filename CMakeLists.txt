@@ -6,7 +6,7 @@ link_directories(gsl)
 add_definitions(-g )
 
 add_executable(sfit main.c interp.c spline.c accel.c  cspline.c tridiag.c  )
-target_link_libraries(sfit m libgsl.a)
+target_link_libraries(sfit m )
 
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})

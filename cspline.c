@@ -23,7 +23,7 @@
 #include <stdlib.h>
 #include <gsl/gsl_linalg.h>
 #include <gsl/gsl_vector.h>
-#include "integ_eval.h"
+//#include "integ_eval.h"
 #include <gsl/gsl_interp.h>
 
 typedef struct
@@ -385,6 +385,19 @@ cspline_eval_deriv2 (const void * vstate,
     }
 }
 
+static inline double
+integ_eval (double ai, double bi, double ci, double di, double xi, double a,
+            double b)
+{
+  const double r1 = a - xi;
+  const double r2 = b - xi;
+  const double r12 = r1 + r2;
+  const double bterm = 0.5 * bi * r12;
+  const double cterm = (1.0 / 3.0) * ci * (r1 * r1 + r2 * r2 + r1 * r2);
+  const double dterm = 0.25 * di * r12 * (r1 * r1 + r2 * r2);
+
+  return (b - a) * (ai + bterm + cterm + dterm);
+}
 
 static
 int
